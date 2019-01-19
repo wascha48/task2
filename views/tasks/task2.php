@@ -5,9 +5,9 @@
 		<script>
 			$(document).ready(function(){ 
 				$('#table2').DataTable({
-				        "paging":   false,
-						"filter": 	false,
-						"info":     false
+				        "paging":	false,
+					"filter":	false,
+					"info":  	false
 				});				
 			}); 
    		</script>
@@ -28,9 +28,9 @@
 					foreach ($task2List as $task2Item): 
 						echo '<tr>';	
 						echo '		<td>' , $task2Item['tovar_name'],'</td>
-									<td>' , $task2Item['price_sum'], '</td>
-									<td>' , $task2Item['count_sum'], '</td>							
-							 </tr>';	
+								<td>' , $task2Item['price_sum'], '</td>
+								<td>' , $task2Item['count_sum'], '</td>							
+							</tr>';	
 					endforeach;
 				?>
 				</tbody>

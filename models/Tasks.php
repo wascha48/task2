@@ -19,22 +19,22 @@ class Tasks
 		// CONCAT(operators.name,' ',operators.fio) AS operator_name,
 		
 		$result = $db->query("SELECT 
-								requests.id AS request_id, 
-								offers.name AS tovar_name, 
-								requests.price, 
-								requests.count,								
-								SUBSTRING_INDEX(SUBSTRING_INDEX(operators.fio, ' ', 2), ' ', -1) AS operator_name
-							FROM requests 
-								LEFT JOIN operators ON requests.operator_id = operators.id 
-								LEFT JOIN offers ON requests.offer_id = offers.id 
-							WHERE 
-								requests.count > 2 
-								AND (
-										operators.id = 10 
-										OR 
-										operators.id = 12											
-									)
-							ORDER BY request_id;"
+					requests.id AS request_id, 
+					offers.name AS tovar_name, 
+					requests.price, 
+					requests.count,								
+					SUBSTRING_INDEX(SUBSTRING_INDEX(operators.fio, ' ', 2), ' ', -1) AS operator_name
+				FROM requests 
+				LEFT JOIN operators ON requests.operator_id = operators.id 
+				LEFT JOIN offers ON requests.offer_id = offers.id 
+				WHERE 
+					requests.count > 2 
+					AND (
+						operators.id = 10 
+						OR 
+						operators.id = 12											
+						)
+				ORDER BY request_id;"
 							);
 		$result->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -58,14 +58,14 @@ class Tasks
 		//Имя товара, количество товара, и сумма (price) по каждому товару (сгруппировать)
 		
 		$result = $db->query("SELECT 
-								offers.name AS tovar_name, 
-                                IFNULL( SUM( requests.count ), 0) AS count_sum, 
-								IFNULL( SUM( requests.price*requests.count  ), 0) AS price_sum
-							FROM offers 
-								LEFT JOIN requests ON requests.offer_id = offers.id 
-							WHERE 1
-                            GROUP BY offers.id
-							ORDER BY offers.name;"
+						offers.name AS tovar_name, 
+		                                IFNULL( SUM( requests.count ), 0) AS count_sum, 
+						IFNULL( SUM( requests.price*requests.count  ), 0) AS price_sum
+					FROM offers 
+						LEFT JOIN requests ON requests.offer_id = offers.id 
+					WHERE 1
+                		        GROUP BY offers.id
+					ORDER BY offers.name;"
 							);
 		$result->setFetchMode(PDO::FETCH_ASSOC);
 
